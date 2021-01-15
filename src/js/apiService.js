@@ -1,5 +1,6 @@
 const baseUrl = `https://pixabay.com/api/`;
 const apiKey = `19649885-84cc8a7bfeabe0e9969e6732d`;
+const params = `?image_type=photo&orientation=horizontal`;
 
 export default {
   query: '',
@@ -8,7 +9,7 @@ export default {
   totalPage: 0,
 
   getFetch() {
-    const url = `${baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${apiKey}`;
+    const url = `${baseUrl}${params}&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${apiKey}`;
     return fetch(url)
       .then(responce => responce.json())
       .then(({ hits, totalHits }) => {

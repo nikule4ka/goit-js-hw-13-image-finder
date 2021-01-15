@@ -5,3 +5,5 @@ import images from './tepmlates/image.hbs';
 
 const { gallery, form } = refs;
 console.log(gallery, form);
+
+console.log(apiService.getFetch());
