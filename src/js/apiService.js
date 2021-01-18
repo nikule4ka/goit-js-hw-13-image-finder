@@ -1,31 +1,52 @@
 const baseUrl = `https://pixabay.com/api/`;
 const apiKey = `19649885-84cc8a7bfeabe0e9969e6732d`;
-const params = `?image_type=photo&orientation=horizontal`;
 
 export default {
   query: '',
   page: 1,
   perPage: 12,
-  totalPage: 0,
 
   getFetch() {
-    const url = `${baseUrl}${params}&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${apiKey}`;
+    // console.log(this.page);
+    const url = `${baseUrl}?image_type=photo&orientation=horizontal&q=${this.query}&page=${this.page}&per_page=${this.perPage}&key=${apiKey}`;
+
     return fetch(url)
       .then(responce => responce.json())
-      .then(({ hits, totalHits }) => {
-        this.totalPage = totalHits;
-        if (hits.length === 0) {
-          return new Error('Error fetching data');
-        }
-        return { hits, page: this.page };
+      .then(({ hits }) => {
+        this.incrementPage();
+        return { hits };
+      })
+      .catch(error => {
+        loadMoreBtn.hide();
+        return errorsNotifications('Oh, no!', 'Something terrible happened.');
       });
+  },
+
+  incrementPage() {
+    this.page += 1;
+  },
+
+  resetPage() {
+    this.page = 1;
   },
 
   get queryValue() {
     return this.query;
   },
 
-  set queryValue(val) {
-    return (this.query = val);
+  set queryValue(newQueryValue) {
+    return (this.query = newQueryValue);
   },
 };
+
+// export default {
+//   getFetch() {
+//     const url = `https://pixabay.com/api/?image_type=photo&q=cat&page=1&per_page=12&key=19649885-84cc8a7bfeabe0e9969e6732d`;
+
+//     return fetch(url)
+//       .then(res => res.json)
+//       .then(({ hits }) => {
+//         console.log(hits);
+//       });
+//   },
+// };

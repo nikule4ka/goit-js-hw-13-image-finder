@@ -39,6 +39,45 @@ input[name='query'] {
   line-height: 40px;
 }
 
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.grid-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: calc((100% - 60px) / 3);
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0.5rem 0.5rem rgba(88, 87, 87, 0.5);
+}
+
+.grid-item:nth-child(3n) {
+  margin-right: 0;
+}
+
+.card__img {
+  box-sizing: border-box;
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.stats-item {
+  display: flex;
+  justify-content: space-around;
+}
+
 .button {
   display: block;
   margin-left: auto;
@@ -47,6 +86,7 @@ input[name='query'] {
   border: 1px solid #e7e7e7;
   background-color: #fafafa;
   border-radius: 8px;
+  margin-bottom: 30px;
 }
 
 .button.is-hidden {
