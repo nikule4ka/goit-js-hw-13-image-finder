@@ -20,4 +20,12 @@ export default {
         return { hits, page: this.page };
       });
   },
+
+  get queryValue() {
+    return this.query;
+  },
+
+  set queryValue(val) {
+    return (this.query = val);
+  },
 };
