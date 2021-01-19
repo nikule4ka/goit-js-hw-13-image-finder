@@ -26,7 +26,7 @@ function allResultSearch() {
     .then(markup => {
       markupGallery(markup, gallery);
       if (apiService.page > 2) {
-        window.scrollBy(0, -window.innerHeight);
+        window.scrollBy(0, window.innerHeight);
       }
       loadMoreBtn.enable();
     });
