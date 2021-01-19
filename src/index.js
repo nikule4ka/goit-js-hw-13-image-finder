@@ -2,7 +2,7 @@ import './styles.css';
 import errorsNotifications from './js/notifications';
 import refs from './js/refs';
 import apiService from './js/apiService';
-import images from './tepmlates/image.hbs';
+import imagesTml from './tepmlates/image.hbs';
 import LoadMoreBtn from './js/load-more-btn.js';
 import clickModalImage from './js/modal-image.js';
 
@@ -20,35 +20,39 @@ loadMoreBtn.refs.button.addEventListener('click', fetchArticles);
 gallery.addEventListener('click', clickModalImage);
 
 function allResultSearch() {
-  apiService
-    .getFetch()
-    .then(({ hits }) => images(hits))
-    .then(markup => {
-      markupGallery(markup, gallery);
-      if (apiService.page > 2) {
-        window.scrollBy(0, window.innerHeight);
-      }
+  loadMoreBtn.disable();
+  apiService.getFetch().then(hits => {
+    if (hits.length < 12) {
+      markupGallery(hits);
+      loadMoreBtn.hide();
+    } else {
+      markupGallery(hits);
       loadMoreBtn.enable();
-    });
+    }
+  });
 }
 
-function markupGallery(markup, place) {
-  place.insertAdjacentHTML('beforeend', markup);
+function markupGallery(hits) {
+  gallery.insertAdjacentHTML('beforeend', imagesTml(hits));
+  window.scrollTo({
+    top: document.documentElement.scrollHeight,
+    behavior: 'smooth',
+  });
 }
 
 function imageSearch(e) {
   e.preventDefault();
 
+  clearArticleContainer();
   apiService.queryValue = form.elements.query.value;
   if (apiService.queryValue === '') {
     loadMoreBtn.hide();
     return errorsNotifications('Nothing to found', 'Please enter a some word');
   }
 
+  apiService.resetPage();
   loadMoreBtn.show();
   fetchArticles();
-  apiService.resetPage();
-  clearArticleContainer();
   form.reset();
 }
 

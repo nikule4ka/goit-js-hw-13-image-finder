@@ -14,7 +14,7 @@ export default {
       .then(responce => responce.json())
       .then(({ hits }) => {
         this.incrementPage();
-        return { hits };
+        return hits;
       })
       .catch(error => {
         loadMoreBtn.hide();
