@@ -2,9 +2,13 @@ import 'basiclightbox/dist/basicLightbox.min.css';
 import * as basicLightbox from 'basiclightbox';
 
 function clickModalImage(e) {
-  if (e.target.tagName === 'IMG') {
+  if (e.target.tagName == 'IMG') {
     const modalImg = e.target.dataset.fullsize_img;
-    const instance = basicLightbox.create(`<img src="${modalImg}" />`);
+
+    const instance = basicLightbox.create(`
+    <img src=${modalImg} />
+  `);
+    console.log(modalImg);
     instance.show();
   }
 }

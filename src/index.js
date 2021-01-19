@@ -1,6 +1,5 @@
 import './styles.css';
 import errorsNotifications from './js/notifications';
-
 import refs from './js/refs';
 import apiService from './js/apiService';
 import images from './tepmlates/image.hbs';

@@ -84,7 +84,7 @@ input[name='query'] {
   margin-right: auto;
   outline: none;
   border: 1px solid #e7e7e7;
-  background-color: #fafafa;
+
   border-radius: 8px;
   margin-bottom: 30px;
 }
@@ -95,4 +95,8 @@ input[name='query'] {
 
 .button > .spinner.is-hidden {
   display: none;
+}
+
+.img-modal {
+  width: 500px;
 }
