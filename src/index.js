@@ -22,11 +22,10 @@ gallery.addEventListener('click', clickModalImage);
 function allResultSearch() {
   loadMoreBtn.disable();
   apiService.getFetch().then(hits => {
+    markupGallery(hits);
     if (hits.length < 12) {
-      markupGallery(hits);
       loadMoreBtn.hide();
     } else {
-      markupGallery(hits);
       loadMoreBtn.enable();
     }
   });
